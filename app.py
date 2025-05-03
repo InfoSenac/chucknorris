@@ -7,6 +7,11 @@ api_url = 'https://api.api-ninjas.com/v1/chucknorris'
 response = requests.get(
     api_url, 
     headers={
-        'X-Api-Key': st.secrets['API_KEY']
+        'X-Api-Key': st.secrets["API_KEY"]
     }
 )
+
+if response.status_code == requests.codes.ok:
+    st.success(response.json()['joke'])
+else:
+    st.error("Error:", response.status_code, response.text)
